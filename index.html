@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio ของฉัน - [ชื่อของคุณ]</title>
+    <style>
+        /* ---------------------
+           1. Global / Reset
+           --------------------- */
+        :root {
+            /* Light Mode Variables */
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --primary-color: #007bff; /* สีหลัก */
+            --accent-color: #ff4081; /* สีเน้น */
+            --card-bg: #f5f5f5;
+            --border-color: #e0e0e0;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --primary-color: #90caf9;
+            --accent-color: #ff9800;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* ---------------------
+           2. Layout / Header
+           --------------------- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--bg-color);
+            padding: 20px 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Dark/Light Mode Toggle */
+        #mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--text-color);
+            margin-left: 15px;
+        }
+
+        /* ---------------------
+           3. Sections / Modern Components
+           --------------------- */
+        section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            /* เพิ่มสีพื้นหลังไล่ระดับเพื่อให้ดูน่าสนใจขึ้น */
+            background: linear-gradient(135deg, var(--bg-color), var(--card-bg));
+        }
+
+        #hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+
+        #hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #ff6a9a; /* เปลี่ยนสีเมื่อโฮเวอร์ */
+            transform: translateY(-2px);
+        }
+
+        /* Projects Grid (ใช้ CSS Grid) */
+        #projects .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .tags span {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+
+        /* Skills (ใช้ Flexbox) */
+        #skills .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: var(--card-bg);
+            padding: 15px 30px;
+            border-radius: 50px; /* ใช้ขอบโค้งมนมากเพื่อให้ดูทันสมัย */
+            border: 2px solid var(--primary-color);
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-light);
+            transition: background 0.3s;
+        }
+
+        .skill-item:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        /* ---------------------
+           4. Footer
+           --------------------- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: var(--text-color);
+        }
+
+        /* ---------------------
+           5. Media Queries (Responsive Design)
+           --------------------- */
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5em;
+            }
+            .nav-links a {
+                margin-left: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#hero" class="logo">P.</a>
+                <div class="nav-links">
+                    <a href="#about">เกี่ยวกับฉัน</a>
+                    <a href="#skills">ทักษะ</a>
+                    <a href="#projects">ผลงาน</a>
+                    <a href="#contact">ติดต่อ</a>
+                    <button id="mode-toggle" aria-label="Toggle Dark/Light Mode"><i class="fas fa-moon"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="container">
+            <div>
+                <p>สวัสดีครับ/ค่ะ, ผม/ดิฉันคือ</p>
+                <h1>[ชื่อของคุณ/ตำแหน่งที่คุณต้องการ]</h1>
+                <p>เป็นนักพัฒนาที่มุ่งเน้นการสร้างสรรค์ประสบการณ์ดิจิทัลที่น่าประทับใจและใช้งานง่าย</p>
+                <a href="#projects" class="cta-button">ดูผลงานของฉัน</a>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2>เกี่ยวกับฉัน</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+                ใส่ประวัติส่วนตัว สไตล์การทำงาน และแรงบันดาลใจของคุณตรงนี้
+                เน้นย้ำถึงความเป็นมืออาชีพและการเรียนรู้ที่ต่อเนื่อง (Growth Mindset)
+                ทำให้เนื้อหานี้กระชับ น่าสนใจ และเป็นตัวคุณมากที่สุด
+            </p>
+        </section>
+
+        <section id="skills" class="container">
+            <h2>ทักษะ</h2>
+            <div class="skills-list">
+                <div class="skill-item">HTML5 & CSS3</div>
+                <div class="skill-item">JavaScript (ES6+)</div>
+                <div class="skill-item">React/Vue/Angular (เลือกเฉพาะที่คุณถนัด)</div>
+                <div class="skill-item">Node.js / Python</div>
+                <div class="skill-item">UI/UX Design</div>
+                <div class="skill-item">Git & GitHub</div>
+            </div>
+        </section>
+
+        <section id="projects" class="container">
+            <h2>ผลงาน</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x200/007bff/ffffff?text=Project+1" alt="Project 1">
+                    <div class="project-info">
+                        <h3>ชื่อโปรเจกต์ 1</h3>
+                        <p>อธิบายโปรเจกต์โดยย่อ (ไม่เกิน 2 บรรทัด)</p>
+                        <div class="tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x200/ff4081/ffffff?text=Project+2" alt="Project 2">
+                    <div class="project-info">
+                        <h3>ชื่อโปรเจกต์ 2</h3>
+                        <p>อธิบายโปรเจกต์โดยย่อที่แสดงความสามารถเฉพาะ</p>
+                        <div class="tags">
+                            <span>React</span>
+                            <span>API</span>
+                            <span>Sass</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x200/90caf9/000000?text=Project+3" alt="Project 3">
+                    <div class="project-info">
+                        <h3>ชื่อโปรเจกต์ 3</h3>
+                        <p>โปรเจกต์นี้โชว์ทักษะการออกแบบหรือ Back-end</p>
+                        <div class="tags">
+                            <span>Node.js</span>
+                            <span>Mongo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>ติดต่อ</h2>
+            <p style="text-align: center;">คุณสามารถติดต่อฉันได้ทางอีเมล: <a href="mailto:your.email@example.com" style="color: var(--primary-color);">your.email@example.com</a></p>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="#" style="font-size: 2em; margin: 0 10px; color: var(--text-color);"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="font-size: 2em; margin: 0 10px; color: var(--text-color);"><i class="fab fa-github"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 [ชื่อของคุณ]. สงวนลิขสิทธิ์.
+        </div>
+    </footer>
+
+    <script>
+        // ---------------------
+        // JS: Dark/Light Mode Toggle
+        // ---------------------
+
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const icon = modeToggle.querySelector('i');
+
+        // ตรวจสอบสถานะเดิมที่เคยตั้งไว้
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun'); // เปลี่ยนไอคอนเป็นดวงอาทิตย์
+        }
+
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            // อัพเดทสถานะใน Local Storage
+            const isNowDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isNowDarkMode);
+
+            // สลับไอคอน
+            if (isNowDarkMode) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // ---------------------
+        // JS: Smooth Scrolling
+        // ---------------------
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // ป้องกันการกระโดดทันที
+                e.preventDefault(); 
+                
+                // เลื่อนไปยัง Section ที่กำหนดอย่างนุ่มนวล
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
